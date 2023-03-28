@@ -33,10 +33,12 @@ namespace Convertor
             saveDialog.Title = "Введите имя файла для сохранения";
             saveDialog.Filter = "Файлы Excel|*.xlsx|Все файлы|*.*";
 
-            string resultFile = saveDialog.FileName;
+            
 
             if (saveDialog.ShowDialog() != DialogResult.OK)
                 return;
+            string resultFile = saveDialog.FileName;
+
             string text = dialog.FileName;
 
 
