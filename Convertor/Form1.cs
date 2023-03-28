@@ -24,7 +24,7 @@ namespace Convertor
         {
             var dialog = new OpenFileDialog();
             dialog.Title = "Введите имя файла";
-            dialog.Filter = "Текстовые файлы|*.txt|Все файлы|*.*";
+            dialog.Filter = "Текстовые файлы|*.PRT|Все файлы|*.*";
 
             if (dialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -42,25 +42,16 @@ namespace Convertor
             string text = dialog.FileName;
 
 
-            using var reader = File.OpenText(text);
-
-            while (!reader.EndOfStream)
-            {
-                var line = reader.ReadLine();
-            }
-
-
-
-            //путь к файлу, в который надо сохранить
+            string contents = File.ReadAllText(text);
+            
 
             using var workbook = new XLWorkbook();
             IXLWorksheet worksheet = workbook.Worksheets.Add("Sheet");
-            worksheet.Cell("A1").Value = text;
+            worksheet.Cell("A1").Value = contents;
             if (!resultFile.EndsWith(".xslx", StringComparison.OrdinalIgnoreCase))
             resultFile += ".xlsx";
             workbook.SaveAs(resultFile);
-
-            //using FileStream stream = new FileStream(text, FileMode.Create);
+                     
 
 
 
